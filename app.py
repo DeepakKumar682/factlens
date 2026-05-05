@@ -239,18 +239,21 @@ html, body, [data-testid="stAppViewContainer"] {
 # ─── Gemini API Call ─────────────────────────────────────────────────────────
 
 def call_gemini(prompt: str, api_key: str) -> str:
-    """Call Gemini 1.5 Flash — completely FREE (1500 requests/day)"""
-    url = (
-        "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-2.0-flash:generateContent?key={api_key}"
-    )
-    payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.1, "maxOutputTokens": 2048},
+    """Groq API — FREE, fast, no rate limits"""
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
     }
-    r = requests.post(url, json=payload, timeout=30)
+    payload = {
+        "model": "llama-3.3-70b-versatile",
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.1,
+        "max_tokens": 2048,
+    }
+    r = requests.post(url, headers=headers, json=payload, timeout=30)
     r.raise_for_status()
-    return r.json()["candidates"][0]["content"]["parts"][0]["text"]
+    return r.json()["choices"][0]["message"]["content"]
 
 
 def safe_parse_json(raw: str):
