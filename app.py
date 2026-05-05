@@ -379,7 +379,7 @@ with st.sidebar:
         "Google Gemini API Key 🆓",
         type="password",
         placeholder="AIza...",
-        help="Get free at aistudio.google.com → 1500 req/day free",
+        help="Get free at console.groq.com → 1500 req/day free",
     )
     tavily_key = st.text_input(
         "Tavily Search API Key 🆓",
