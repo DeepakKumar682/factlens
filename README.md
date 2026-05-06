@@ -113,4 +113,4 @@ Report with verdicts, explanations, and source links
 
 ---
 
-Made with ❤️ for CogCulture | [cogculture.agency](https://cogculture.agency)
+Made with CogCulture❤️
